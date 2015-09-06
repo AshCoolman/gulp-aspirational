@@ -1,0 +1,10 @@
+.DS_Store
+npm-debug.log
+dist/
+doc/
+node_modules/
+bower_components/
+jspm_packages/
+*.sublime-*
+*.nogit.*
+**/*.nogit.*

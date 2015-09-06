@@ -1,0 +1,23 @@
+{
+  "name": "yiang-test",
+  "version": "0.0.0",
+  "authors": [
+    "Ashley Coleman <ashley@yieldify.com>"
+  ],
+  "moduleType": [
+    "amd",
+    "es6",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pure": "~0.6.0"
+  }
+}
