@@ -1,15 +1,7 @@
-packagejson = {
-    "build_values": {
-        "app_name" : "app",
-        "build_dir" : "dist"
-    }
-}
-
 m = require('./gulp/modules')()
 { gulp, through } = m
-{ name, version, build_values } = packagejson
-{ build_dir, app_name }             = build_values
-
+{ name, version } = require './package.json'
+{ build_dir, app_name } = require './gulp.config.json'
 
 ###*
  * CSS
@@ -38,29 +30,29 @@ cssTaskList.forEach (cssTask) ->
 
 
 
-# ###*
-#  * JS
-# ###
-# jsTaskList = [
-#     {
-#         outFile: "vendor.js"
-#         outDir: "#{build_dir}/css/"
-#         src: main_bower_files filter: (arg) -> arg.indexOf(".js") > -1
-#     }
-#     {
-#         outFile: "app.js"
-#         outDir: "#{build_dir}/css/"
-#         src: "app/**/*.{less,css,styl}"
-#     }
-# ].forEach (jsTask) ->
-#     gulp.task jsTask.outFile, ->
-#         gulp.src jsTask.src
-#             .pipe through.coffee
-#             .pipe concat jsTask.outFile
-#             # Minify in release mode
-#             .pipe through.uglified
-#             .pipe through.minSuffixed
-#             .pipe gulp.dest jsTask.outDir
+###*
+ * JS
+###
+jsTaskList = [
+    {
+        outFile: "vendor.js"
+        outDir: "#{build_dir}/js/"
+        src: m.main_bower_files filter: (arg) -> arg.includes(".js") > -1
+    }
+    {
+        outFile: "app.js"
+        outDir: "#{build_dir}/js/"
+        src: "app/**/*.{js,coffee}"
+    }
+]
+jsTaskList.forEach (jsTask) ->
+    gulp.task jsTask.outFile, ->
+        gulp.src jsTask.src
+            .pipe through.coffee
+            .pipe m.concat jsTask.outFile
+            .pipe through.uglified
+            .pipe through.minSuffixed
+            .pipe gulp.dest jsTask.outDir
 
  
 # # Precompile angular templates

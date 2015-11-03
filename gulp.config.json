@@ -1,0 +1,6 @@
+{
+    "build_values": {
+        "app_name" : "app",
+        "build_dir" : "dist"
+    }
+}
